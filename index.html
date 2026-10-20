@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CodeNav privacy policy</title>
+<meta name="description" content="Privacy policy of the CodeNav for GitLab & GitHub browser extension.">
+<style>
+  :root { --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --accent: #1f75cb; --border: #d1d9e0; --code: #f6f8fa; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0d1117; --fg: #e6edf3; --muted: #9198a1; --accent: #58a6ff; --border: #3d444d; --code: #161b22; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 40px 16px 64px; }
+  h1 { font-size: 30px; line-height: 1.25; margin: 0 0 4px; }
+  h2 { font-size: 20px; margin: 32px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+  p, ul { margin: 0 0 14px; }
+  ul { padding-left: 22px; }
+  li { margin: 4px 0; }
+  .muted { color: var(--muted); }
+  code { font: 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: var(--code); border: 1px solid var(--border); border-radius: 4px; padding: 0 4px; overflow-wrap: anywhere; }
+  a { color: var(--accent); }
+  .summary { border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 6px; padding: 12px 16px 2px; margin: 20px 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>CodeNav privacy policy</h1>
+  <p class="muted">Effective 7 October 2026. Applies to the CodeNav for GitLab &amp; GitHub browser extension.</p>
+
+  <p>CodeNav adds IDE-style code navigation (file explorer, tabs, go to definition, find references,
+  symbol search) to GitLab and GitHub pages. It runs entirely in your browser. This policy explains
+  what it reads, what it stores, and where data goes.</p>
+
+  <div class="summary">
+    <ul>
+      <li>CodeNav reads code only from the GitLab or GitHub site you are browsing, through that site's own API, using your existing session or a token you give it.</li>
+      <li>Parsed indexes and source files are cached locally in your browser. Non-code files are never written to disk.</li>
+      <li>Tokens stay in the extension's storage and are sent only to the host they belong to.</li>
+      <li>There is no analytics and no telemetry. Nothing is sent to the developer or to any third party, and nothing is sold.</li>
+      <li>You can clear the cache at any time from the extension's Options page.</li>
+    </ul>
+  </div>
+
+  <h2>What CodeNav reads</h2>
+  <p>When you open CodeNav on a repository page, it requests that repository's file list and the
+  contents of files from the same site:</p>
+  <ul>
+    <li><strong>GitLab</strong> (gitlab.com or a self-hosted GitLab you enable): requests go to the GitLab host of the
+    current tab, to its API endpoints (<code>/api/v4</code>, <code>/api/graphql</code> and the file-finder JSON). They are
+    made from the page itself, so they use your existing GitLab sign-in. If you add a GitLab personal
+    access token in Options, it is used instead and sent only to that GitLab host.</li>
+    <li><strong>GitHub</strong> (github.com): requests go to <code>api.github.com</code> and <code>raw.githubusercontent.com</code>.
+    Public repositories work without signing in. Cookies are never sent.</li>
+    <li><strong>GitHub Enterprise Server</strong> (a host you enable): requests go to that host's <code>/api</code> endpoints with
+    the personal access token you provide.</li>
+  </ul>
+  <p>CodeNav may also open other repositories on the same site when you navigate into them, for example a
+  Go module or a Git submodule that the current repository depends on.</p>
+
+  <h2>Signing in with GitHub</h2>
+  <p>"Sign in with GitHub" uses GitHub's OAuth device flow. CodeNav asks <code>github.com</code> for a one-time code,
+  you enter that code on github.com, and GitHub returns an access token. No password and no client
+  secret are involved. CodeNav then asks <code>api.github.com</code> for your account name so it can show who
+  you are signed in as.</p>
+
+  <h2>What CodeNav stores, and where</h2>
+  <p>All of it stays in your browser profile:</p>
+  <ul>
+    <li><strong>Settings</strong> (in the extension's storage): the hosts you enabled, per-project configuration, editor
+    font size, and any tokens: a GitLab or GitHub Enterprise personal access token you entered, or the
+    GitHub token and account name from "Sign in with GitHub".</li>
+    <li><strong>Cache</strong> (in the extension's IndexedDB): repository file listings, commit identifiers, parsed
+    symbol indexes, and the contents of source-code files, so that navigation is fast the next time.
+    Other files, such as configuration files that might contain secrets, are kept in memory only while
+    CodeNav is open and are never written to the cache.</li>
+  </ul>
+
+  <h2>Where data goes</h2>
+  <ul>
+    <li>Tokens are sent only to their own host: a GitLab token only to that GitLab host, the GitHub token
+    only to GitHub's API (never to <code>raw.githubusercontent.com</code>), a GitHub Enterprise token only to that
+    Enterprise host.</li>
+    <li>CodeNav has no server. It does not send code, browsing activity, identifiers, usage statistics or
+    any other data to the developer or to any third party. It contains no analytics, telemetry,
+    advertising or tracking code, and it does not load code from the internet.</li>
+    <li>Your data is not sold, shared, or used for any purpose other than code navigation.</li>
+    <li>Some symbols from libraries outside the repository show a documentation link (for example to the
+    Go, Python or MDN reference). Those pages open only if you click the link, like any other link.</li>
+  </ul>
+
+  <h2>Your choices</h2>
+  <ul>
+    <li><strong>Clear the cache:</strong> Options → <em>Clear cache</em> deletes everything CodeNav has cached.</li>
+    <li><strong>Remove a token:</strong> Options → <em>Sign out</em> (GitHub) or clear the token field for a host. To revoke the
+    GitHub authorization itself, use GitHub → Settings → Applications.</li>
+    <li><strong>Remove access to a site:</strong> remove the host in Options, or revoke the site permission in your
+    browser's extension settings.</li>
+    <li><strong>Uninstall:</strong> removing the extension deletes its settings, tokens and cache.</li>
+  </ul>
+
+  <h2>Children</h2>
+  <p>CodeNav is a developer tool and is not directed at children.</p>
+
+  <h2>Changes</h2>
+  <p>If this policy changes, the new version will be published at the same address with a new effective
+  date.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this policy: <a href="mailto:salmaanshahid25@gmail.com">salmaanshahid25@gmail.com</a></p>
+</main>
+</body>
+</html>
